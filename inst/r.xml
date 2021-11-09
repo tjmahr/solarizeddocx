@@ -113,7 +113,9 @@
 			<keyword attribute="Reserved Words" context="#stay" String="words"/>
 			<Float attribute="Float" context="#stay"/>
 			<Int attribute="Int" context="#stay"/>
+			<RegExpr attribute="Int" String="[0-9]+[L]?" context="#stay"/>
 			<RegExpr attribute="Keyword" context="#stay" String="[a-zA-Z_]+[a-zA-Z_\.0-9]*(?=[\s]*[(])|\.[a-zA-Z_\.]+[a-zA-Z_\.0-9]*(?=[\s]*[(])"/>
+
 			<DetectChar attribute="Symbol" context="parenthesis" char="("/>
 
 			<!-- For (assignment) operators, enter a new context operator_rhs to check what follows (generally, that should not be another op) -->
@@ -150,11 +152,11 @@
 		<itemData name="Headline" defStyleNum="dsDocumentation" bold="1"/>
 		<itemData name="Comment" defStyleNum="dsComment"/>
 		<itemData name="Prompt comment" defStyleNum="dsInformation"/>
-		<itemData name="Assign" defStyleNum="dsOthers" bold="1" italic="0" spellChecking="false"/>
+		<itemData name="Assign" defStyleNum="dsOperator" bold="1" italic="0" spellChecking="false"/>
 		<itemData name="Control Structure" defStyleNum="dsControlFlow" spellChecking="false"/>
 		<itemData name="Reserved Words" defStyleNum="dsConstant" spellChecking="false"/>
 		<itemData name="Error" defStyleNum="dsError" spellChecking="false"/>
-		<itemData name="Operator" defStyleNum="dsSpecialChar" spellChecking="false"/>
+		<itemData name="Operator" defStyleNum="dsOperator" spellChecking="false"/>
 		<itemData name="String Char"  defStyleNum="dsSpecialChar" spellChecking="false"/>
 		<itemData name="Float" defStyleNum="dsFloat" spellChecking="false"/>
 		<itemData name="Int" defStyleNum="dsDecVal" spellChecking="false"/>
