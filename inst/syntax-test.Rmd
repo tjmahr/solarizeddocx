@@ -1,0 +1,132 @@
+---
+title: Test of Solarized Syntax Highlighting
+subtitle: Here we go
+author: TJ Mahr
+# date: `r Sys.Date()`
+output: 
+  solarizeddocx::document: default
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = TRUE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+```{r}
+# 75 characters fit okay
+0123456789012345678901234567890123456789012345678901234567890123456789012345
+```
+
+
+Syntax gauntlet:
+
+```{r, eval = FALSE}
+library(magrittr)
+x <- TRUE | T
+y <- FALSE || F
+1L + 1L
+1.000 - 1.000
+10 ^ 2
+"string"
+'string'
+package::function
+package::my_function
+NA
+NA_character_
+Inf
+NULL
+1:10
+for ( x in 1) {
+  !! no
+  f <- function(...) {
+    x <- c(..., ..1, ..2, ...elt(1))
+    return(data)
+  }
+  f <- \(x) {
+    c(x)
+  }
+}
+
+a <- list(x = 10, y = 100)
+a$x
+a[[1]]
+a[2]
+
+"newline\n and escaped slash \\"
+
+x %>% rnorm(10, .) %>% round(2)
+
+x |> round(2)
+10.11 |> (\(x) round(x))()
+-2 + 4i
+```
+
+
+Changes to the from the default language definition:
+
+- Prompt comments `#>` and regular comments `#` get separate highlighting style
+
+```{r}
+# this should be italic but the output should be upright
+1:10
+```
+
+- Explicit integers now highlighted
+
+```{r}
+x <- 1L
+y <- 1
+```
+
+Gaps in the current syntax highlighting:
+
+- It would be nice to highlight the package name and italicize it here:
+
+```{r, eval = FALSE}
+package::func
+```
+
+- Native pipe
+- i in complex numbers
+
+
+***
+
+
+```{r, error = TRUE}
+test %>% 
+  testy() %>% 
+  testing()
+message("test")
+warning("test")
+stop("test")
+# stop <- function(...) message(...)
+
+if (TRUE) {
+  print("hello")
+} else {
+  y ~ x
+}
+```
+
+We also `have to test` markup styles
+
+* list 1
+* list 2
+  - list 1
+* list 3
+
+> blockquote
+
+```
+print("hello")
+```
+
+
+https://bookdown.org/yihui/rmarkdown/new-formats.html

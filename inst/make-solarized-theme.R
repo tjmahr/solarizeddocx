@@ -98,9 +98,9 @@ new <- j %>%
   set_text_style("Function", text = p$blue) %>%
   set_text_style("ControlFlow", text = p$green, bold = FALSE) %>%
   set_text_style("Char",           text = p$cyan) %>%
-  set_text_style("SpecialChar",    text = p$cyan) %>%
+  set_text_style("SpecialChar",    text = p$blue) %>%
   set_text_style("String",         text = p$cyan) %>%
-  set_text_style("VerbatimString", text = p$cyan) %>%
+  set_text_style("VerbatimString", text = p$violet) %>%
   set_text_style("SpecialString",  text = p$cyan) %>%
   set_text_style("BuiltIn",  ) %>%
   set_text_style("Extension", ) %>%
@@ -117,11 +117,12 @@ new <- j %>%
 
 jsonlite::write_json(
   new,
-  "inst/test.theme",
+  "inst/solarized_light.theme",
   null = "null",
   auto_unbox = TRUE
 )
-#
+
+file.remove("syntax-test.docx")
 rmarkdown::render("syntax-test.Rmd")
 system2("open", "syntax-test.docx")
 # ?rmarkdown::word_document
@@ -177,7 +178,9 @@ system2("open", "syntax-test.docx")
 #
 # dsFloat, floating point values.
 #
-# dsConstant, built-in and user defined constants like PI. Comment and
+# dsConstant, built-in and user defined constants like PI.
+#
+# Comment and
 # documentation-related default styles:
 #
 # dsComment, comments.
