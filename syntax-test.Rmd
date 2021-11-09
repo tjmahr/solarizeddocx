@@ -25,16 +25,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-Can I make special formatted output comments?
-
-```{r}
-# this should be italic but the output should be upright
-1:10
-```
-
-test
+Syntax gauntlet:
 
 ```{r, eval = FALSE}
+library(magrittr)
 x <- TRUE
 y <- FALSE
 1L + 1L
@@ -51,8 +45,55 @@ NULL
 1:10
 for ( x in 1) {
   !! no
+  f <- function(...) {
+    x <- c(..., ..1, ..2)
+    return(data)
+  }
+  f <- \(x) {
+    c(x)
+  }
 }
+
+a <- list(x = 10, y = 100)
+a$x
+a[[1]]
+a[2]
+
+
+x %>% rnorm(10, .) %>% round(2)
+
+x |> round(2)
+10.11 |> (\(x) round(x))()
 ```
+
+
+Changes to the from the default language definition:
+
+- Prompt comments `#>` and regular comments `#` get separate highlighting style
+
+```{r}
+# this should be italic but the output should be upright
+1:10
+```
+
+Gaps in the current syntax highlighting:
+
+- It would be nice to highlight the package name and italicize it here:
+
+```{r, eval = FALSE}
+package::func
+```
+
+- Explicit integers should be highlighted
+
+```{r}
+x <- 1L
+y <- 1
+```
+
+
+
+
 
 ```{r, error = TRUE}
 test %>% 
@@ -122,7 +163,7 @@ devtools::install_github("tjmahr/solarizeddocx")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(solarizeddocx)
+# library(solarizeddocx)
 ## basic example code
 ```
 
