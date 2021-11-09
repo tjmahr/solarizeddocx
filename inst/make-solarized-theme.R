@@ -10,7 +10,7 @@
 # > Then edit my.theme and use it like this:
 # >
 # >     pandoc --highlight-style my.theme
-
+library(magrittr)
 # via https://github.com/altercation/solarized#the-values
 p <- list(
   base03  = "#002b36",
@@ -51,7 +51,7 @@ set_text_style <- function(data, name, ...) {
     "italic" = "italic",
     "underline" = "underline",
     "line" = "line-number-color",
-    "line" = "line-number-background-color"
+    "line_background" = "line-number-background-color"
   )
   dots <- setNames(dots, style_names[names(dots)])
 
@@ -71,36 +71,49 @@ j <- save_base_theme("inst/base.theme") %>%
 # there is definitely a smart more data oriented way but I wanted to hit
 # the ground running with something pipeable and interactive.
 
+# These are the creator's styles for Vim
+# https://github.com/altercation/vim-colors-solarized/blob/master/colors/solarized.vim#L534
+
 new <- j %>%
+  set_text_style(
+    "global",
+    text = p$base00, background = p$base3,
+    # I'm having trouble testing these
+    line = p$base1, line_background = p$base2
+  ) %>%
   set_text_style("Comment", text = p$base01, italic = TRUE) %>%
-  set_text_style("CommentVar", ) %>%
+  # not sure that this is
+  set_text_style("CommentVar", text = p$base01, italic = TRUE) %>%
+  ## comments
+  set_text_style("Documentation", text = p$base01, italic = TRUE, bold = FALSE) %>%
+  set_text_style("Keyword", text = p$green) %>%
+  set_text_style("Variable", text = p$green) %>%
   set_text_style("Constant", text = p$cyan) %>%
+  set_text_style("String", text = p$cyan) %>%
+  set_text_style("Float", text = p$magenta) %>%
+  set_text_style("Operator", text = p$yellow) %>%
+  set_text_style("Function", text = p$blue) %>%
+  set_text_style("ControlFlow", text = p$green) %>%
   set_text_style("Other", ) %>%
   set_text_style("Attribute", ) %>%
   set_text_style("SpecialString", ) %>%
   set_text_style("Annotation", ) %>%
-  set_text_style("Function", ) %>%
-  set_text_style("String", ) %>%
-  set_text_style("ControlFlow", ) %>%
-  set_text_style("Operator", ) %>%
-  set_text_style("Error", ) %>%
   set_text_style("BaseN", ) %>%
-  set_text_style("Alert", ) %>%
-  set_text_style("Variable", ) %>%
+  set_text_style("Error", text = p$orange) %>%
+  set_text_style("Alert", text = p$orange) %>%
+  set_text_style("Warning", text = p$orange) %>%
   set_text_style("BuiltIn", ) %>%
   set_text_style("Extension", ) %>%
   set_text_style("Preprocessor", ) %>%
-  set_text_style("Information", ) %>%
-  set_text_style("VerbatimString", ) %>%
-  set_text_style("Warning", ) %>%
-  set_text_style("Documentation", ) %>%
+  # i'm using this for #> comments
+  set_text_style("Information", text = p$base01, italic = FALSE, bold = FALSE) %>%
+  set_text_style("VerbatimString", text = p$base00) %>%
   set_text_style("Import", ) %>%
   set_text_style("Char", ) %>%
   set_text_style("DataType", ) %>%
-  set_text_style("Float", ) %>%
   set_text_style("SpecialChar", ) %>%
   set_text_style("DecVal", ) %>%
-  set_text_style("Keyword", )
+  { }
 
 jsonlite::write_json(
   new,
@@ -108,3 +121,7 @@ jsonlite::write_json(
   null = "null",
   auto_unbox = TRUE
 )
+#
+# rmarkdown::render("README.Rmd")
+# system2("open", "README.docx")
+# ?rmarkdown::word_document

@@ -1,0 +1,143 @@
+---
+title: yes
+subtitle: hell yes
+author: TJ Mahr
+date: today
+output: 
+  word_document:
+    # highlight: null
+    toc: true
+    pandoc_args:
+      - "--highlight-style=./inst/test.theme"
+      - "--syntax-definition=./inst/r.xml"
+    md_extensions: +fenced_code_attributes
+    reference_docx: "inst/custom-reference.docx"
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = TRUE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+Can I make special formatted output comments?
+
+```{r}
+# this should be italic but the output should be upright
+1:10
+```
+
+test
+
+```{r, eval = FALSE}
+x <- TRUE
+y <- FALSE
+1L + 1L
+1.000 - 1.000
+10 ^ 2
+"string"
+'string'
+package::function
+package::my_function
+NA
+NA_character_
+Inf
+NULL
+1:10
+for ( x in 1) {
+  !! no
+}
+```
+
+```{r, error = TRUE}
+test %>% 
+  testy() %>% 
+  testing()
+message("test")
+warning("test")
+stop("test")
+# stop <- function(...) message(...)
+
+if (TRUE) {
+  print("hello")
+} else {
+  y ~ x
+}
+
+# do 80 chars fit
+0123456789012345678901234567890123456789012345678901234567890123456789012345
+```
+
+We also `have to test` things
+
+
+
+# test of line numbers
+
+~~~~ {#mycode .haskell .numberLines startFrom="100"}
+qsort []     = []
+qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
+               qsort (filter (>= x) xs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```{r results='asis', echo=FALSE}
+   x <- 1:10
+   y <- x^2
+   plot(x,y)
+```
+
+```
+pandoc -o custom-reference.docx --print-default-data-file reference.docx
+```
+
+
+# solarizeddocx
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of solarizeddocx is to ...
+
+## Installation
+
+You can install the released version of solarizeddocx from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("solarizeddocx")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("tjmahr/solarizeddocx")
+```
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(solarizeddocx)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
