@@ -87,11 +87,15 @@
 
 		<context attribute="Normal Text" lineEndContext="#stay" name="FindComments">
 			<Detect2Chars attribute="Headline" context="Headline" char="#" char1="#"/>
+			<Detect2Chars attribute="Prompt comment" context="Prompt comment" char="#" char1="&gt;"/>
 			<DetectChar attribute="Comment" context="Comment" char="#"/>
 		</context>
 		<context attribute="Headline" lineEndContext="#pop" name="Headline">
 			<DetectSpaces />
 			<IncludeRules context="##Comments" />
+		</context>
+		<context attribute="Prompt comment" lineEndContext="#pop" name="Prompt comment">
+			<DetectSpaces />
 		</context>
 		<context attribute="Comment" lineEndContext="#pop" name="Comment">
 			<DetectSpaces />
@@ -145,6 +149,7 @@
 		<itemData name="String" defStyleNum="dsString"/>
 		<itemData name="Headline" defStyleNum="dsDocumentation" bold="1"/>
 		<itemData name="Comment" defStyleNum="dsComment"/>
+		<itemData name="Prompt comment" defStyleNum="dsInformation"/>
 		<itemData name="Assign" defStyleNum="dsOthers" bold="1" italic="0" spellChecking="false"/>
 		<itemData name="Control Structure" defStyleNum="dsControlFlow" spellChecking="false"/>
 		<itemData name="Reserved Words" defStyleNum="dsConstant" spellChecking="false"/>
@@ -159,6 +164,7 @@
 <general>
 	<comments>
 		<comment name="singleLine" start="#"/>
+		<comment name="prompt" start="#&gt;"/>
 	</comments>
 	<keywords casesensitive="true" weakDeliminator="." additionalDeliminator="$"/>
 </general>
