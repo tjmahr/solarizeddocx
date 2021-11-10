@@ -1,16 +1,10 @@
-# https://pandoc.org/MANUAL.html#syntax-highlighting:
-#
-# > If you are not satisfied with the predefined styles, you can use
-# > --print-highlight-style to generate a JSON .theme file which can be modified
-# > and used as the argument to --highlight-style. To get a JSON version of the
-# > pygments style, for example:
-# >
-# >     pandoc --print-highlight-style pygments > my.theme
-# >
-# > Then edit my.theme and use it like this:
-# >
-# >     pandoc --highlight-style my.theme
+# Plan:
+# - Get the JSON version of the default theme
+# - modify it with R
+# - save a new JSON file
+
 library(magrittr)
+
 # via https://github.com/altercation/solarized#the-values
 p <- list(
   base03  = "#002b36",
@@ -31,11 +25,23 @@ p <- list(
   green   = "#859900"
 )
 
+# https://pandoc.org/MANUAL.html#syntax-highlighting:
+#
+# > If you are not satisfied with the predefined styles, you can use
+# > --print-highlight-style to generate a JSON .theme file which can be modified
+# > and used as the argument to --highlight-style. To get a JSON version of the
+# > pygments style, for example:
+# >
+# >     pandoc --print-highlight-style pygments > my.theme
+# >
+# > Then edit my.theme and use it like this:
+# >
+# >     pandoc --highlight-style my.theme
 save_base_theme <- function(path) {
   system2(
     command = rmarkdown::pandoc_exec(),
     "--print-highlight-style pygments",
-    # stdout = path
+    stdout = path
   )
   invisible(path)
 }
@@ -64,30 +70,27 @@ set_text_style <- function(data, name, ...) {
   data
 }
 
-
 j <- save_base_theme("inst/base.theme") %>%
   jsonlite::read_json()
 
-# there is definitely a smart more data oriented way but I wanted to hit
-# the ground running with something pipeable and interactive.
-
-# These are the creator's styles for Vim
-# https://github.com/altercation/vim-colors-solarized/blob/master/colors/solarized.vim#L534
-
+# (There is definitely a smart more data oriented way but I wanted to hit
+# the ground running with something pipeable and interactive.)
 new <- j %>%
   set_text_style(
     "global",
-    text = p$base00, background = p$base3,
+    text = p$base00,
+    background = p$base3,
     # I'm having trouble testing these
-    line = p$base1, line_background = p$base2
+    line = p$base1,
+    line_background = p$base2
   ) %>%
+  # # comments
   set_text_style("Comment", text = p$base1, italic = TRUE) %>%
-  # not sure what this is
   # ## comments
   set_text_style("Documentation", text = p$base1,  italic = TRUE,  bold = FALSE) %>%
-  set_text_style("CommentVar", text = p$base1, italic = TRUE) %>%
   # #> comments
   set_text_style("Information",   text = p$base00, italic = FALSE, bold = FALSE) %>%
+  set_text_style("CommentVar", text = p$base1, italic = TRUE) %>%
   set_text_style("Keyword",  text = p$green) %>%
   set_text_style("Variable", text = p$violet) %>%
   set_text_style("Constant", text = p$orange) %>%
@@ -122,10 +125,10 @@ jsonlite::write_json(
   auto_unbox = TRUE
 )
 
-file.remove("syntax-test.docx")
-rmarkdown::render("syntax-test.Rmd")
-system2("open", "syntax-test.docx")
-# ?rmarkdown::word_document
+
+# file.remove("syntax-test.docx")
+# rmarkdown::render("syntax-test.Rmd")
+# system2("open", "syntax-test.docx")
 
 
 # Definitions of the things
