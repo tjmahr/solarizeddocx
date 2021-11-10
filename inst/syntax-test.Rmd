@@ -1,15 +1,16 @@
 ---
-title: Test of Solarized Syntax Highlighting
-subtitle: Here we go
+title: Solarized Syntax Highlighting in Microsoft Word
+subtitle: More than just highlighting scheme
 author: TJ Mahr
-# date: `r Sys.Date()`
+date: |
+  `r format(Sys.time(), "Updated on %A, %B %d, %Y %I:%M %p")`
 output: 
   solarizeddocx::document: default
+  word_document: default
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = TRUE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,16 +19,162 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Overview
+
+This package was created because I think the [solarized color
+palette](https://github.com/altercation/solarized) looks nice in Word documents
+created by pandoc, but solarized is not one of the supported highlighting
+styles. 
+
+This document is the result of calling `rmarkdown::word_document()` but
+customizing the output by passing along three files to pandoc.
+
+First, the **reference docx** file defines the styles for the Word document. The
+main changes from the default style are that: 
+
+0.  the "normal" text style now includes 10-pt of space before paragraphs. The
+    "source code" blocks outputted by pandoc inherit from this style---I think
+    this is how it works---so that space prevents code blocks from touching
+    preceding text.
+1.  the blue in headings and links uses solarized's blue color
+2.  the `verbatim text` uses solarized's light body text color
+3.  titles and other front matter are now left aligned
+4.  the block text style is 1-pt smaller than the body text
+
 ```{r}
+basename(solarizeddocx::file_reference_docx())
+```
+
+Second, the **solarized light highlighting theme** file defines which colors to assign
+token types during syntax highlighting. 
+
+```{r}
+basename(solarizeddocx::file_solarized_light_theme())
+```
+
+I borrowed the color assignments mostly from [the rsthemes
+package](https://github.com/gadenbuie/rsthemes/blob/main/inst/templates/solarized-light.scss).
+These are:
+
+```{scss, eval = FALSE}
+// R language colors
+$code_comment  : $base1;
+$code_string   : $cyan;
+$code_function : $blue;
+$code_reserved : $green;
+$code_operator : $yellow;
+$code_bracket  : $yellow;
+$code_value    : $magenta;
+$code_namespace: $red;
+$code_variable : $violet;
+$code_message  : $orange;
+$code_namespace_font_style: italic;
+
+$code_other: $code_variable;
+```
+
+Third, I customized the **R syntax language definition file** so make results
+somewhat better for Word documents. The most important change is that regular
+comments are light and italic and prompt-comments used for output are darker and
+more upright. This change makes it easier to read output from dataframes.
+
+```{r}
+# this comment is italic. the output below is roman
+basename(solarizeddocx::file_solarized_light_theme())
+
+model <- lm(mpg ~ cyl, mtcars)
+summary(model)
+
+coef(summary(model))
+```
+
+<!-- This inserts a page break in word. -->
+
+```{=openxml}
+<w:p>
+  <w:r>
+    <w:br w:type="page"/>
+  </w:r>
+</w:p>
+```
+
+## Code examples
+
+Some basic examples:
+
+```{r}
+f <- function(x, ...) {
+  mean(x, ...)
+}
+
+f(c(1, 2, 3, 4, NA), na.rm = TRUE)
+
+print("Hello!")
+```
+
+Here is how wide we can make our code examples, comfortably, in Word.
+
+```{r, eval = FALSE}
 # 75 characters fit okay
 0123456789012345678901234567890123456789012345678901234567890123456789012345
 ```
 
+Here are the changes I made to the default R language definition:
 
-Syntax gauntlet:
+```{r}
+# italic code comments
+print("but roman output comments")
+
+# integers ending in L are now highlighted
+c(1.0, 1, 1L)
+```
+
+One feature in pandoc highlighting but not in RStudio highlighting of escape 
+sequences. 
+
+```{r}
+# escape sequences are highlighted inside of strings
+x <- "this string has an \"escaped\" characters"
+y <- "we escape things by using a \\. \nso that \\n is a newline"
+cat(x)
+cat(y)
+```
+
+Based on my tests, two things that currently not correct with the default
+definition and my definition are the native pipe, lambda syntax, and imaginary
+numbers.
+
+```{r, eval = FALSE}
+# native pipe
+1 |> rnorm(1)
+
+# lambda
+round2 <- \(x) round(x, 2)
+1 |> rnorm(1) |> round(2)
+
+# immediately invoked lambda in a pipe
+10.111 |> (\(x) round(x, 0))()
+
+# imaginary number
+-2 + 4i
+```
+
+My wishlist for the definition is namespace highlighting. It would 
+be cool for package names to be highlighted and italicized.
+
+```{r, eval = FALSE}
+stats::rnorm(10)
+```
+
+### The Gauntlet
+
+Below is the syntax gauntlet where we try a bunch of things.
 
 ```{r, eval = FALSE}
 library(magrittr)
+
+# I don't think T and F should highlight because they are 
+# overwritable 
 x <- TRUE | T
 y <- FALSE || F
 1L + 1L
@@ -35,14 +182,14 @@ y <- FALSE || F
 10 ^ 2
 "string"
 'string'
-package::function
 package::my_function
+package:::my_secret_function
 NA
 NA_character_
 Inf
 NULL
 1:10
-for ( x in 1) {
+for (x in 1) {
   !! no
   f <- function(...) {
     x <- c(..., ..1, ..2, ...elt(1))
@@ -51,6 +198,12 @@ for ( x in 1) {
   f <- \(x) {
     c(x)
   }
+  repeat
+  break
+  next
+  while (FALSE) {
+    print("never ever run"); print("not ever")
+  }
 }
 
 a <- list(x = 10, y = 100)
@@ -58,6 +211,8 @@ a$x
 a[[1]]
 a[2]
 
+'string'
+"string"
 "newline\n and escaped slash \\"
 
 x %>% rnorm(10, .) %>% round(2)
@@ -65,68 +220,72 @@ x %>% rnorm(10, .) %>% round(2)
 x |> round(2)
 10.11 |> (\(x) round(x))()
 -2 + 4i
-```
 
-
-Changes to the from the default language definition:
-
-- Prompt comments `#>` and regular comments `#` get separate highlighting style
-
-```{r}
-# this should be italic but the output should be upright
-1:10
-```
-
-- Explicit integers now highlighted
-
-```{r}
-x <- 1L
-y <- 1
-```
-
-Gaps in the current syntax highlighting:
-
-- It would be nice to highlight the package name and italicize it here:
-
-```{r, eval = FALSE}
-package::func
-```
-
-- Native pipe
-- i in complex numbers
-
-
-***
-
-
-```{r, error = TRUE}
 test %>% 
   testy() %>% 
   testing()
+
+# I noticed message vs warning/stop having different RStudio colors
 message("test")
 warning("test")
 stop("test")
-# stop <- function(...) message(...)
 
 if (TRUE) {
   print("hello")
 } else {
-  y ~ x
+  y ~ x + (1 | z:w)
 }
 ```
 
-We also `have to test` markup styles
+
+## Markup styles
+
+We also would like to test markup styles here.
+
+***
+
+# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+
+###### H6
+
 
 * list 1
 * list 2
   - list 1
 * list 3
 
+Paragraph.
+
+1. list 1
+2. list 2
+   1. list 1
+3. list 1
+
 > blockquote
+
+A paragraph followed by code. **Strong**. *Emphasis*. `Code`.
 
 ```
 print("hello")
 ```
 
+Code that emits a table
 
-https://bookdown.org/yihui/rmarkdown/new-formats.html
+```{r}
+knitr::kable(
+  data.frame(
+    day = c(1, 2, 3, 4),
+    result = c("yes", "no", "yes", "yes")
+  ), 
+  caption = "Check it out"
+)
+```
+

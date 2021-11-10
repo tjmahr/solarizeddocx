@@ -1,0 +1,80 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# solarizeddocx
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+
+```{r, echo = FALSE, fig.cap = "Comparison of the solarized document theme versus the default theme."}
+knitr::include_graphics("man/figures/side-by-side-2.png", dpi = 300)
+```
+
+solarizeddocx provides an [RMarkdown](https://rmarkdown.rstudio.com/) output
+format to create a docx file with
+[solarized](https://github.com/altercation/solarized) syntax highlighting. It
+works by provide custom style files to [pandoc](https://pandoc.org/MANUAL.html).
+
+Currently only the light solarized theme is supported.
+
+
+## Installation
+
+You can install the development version of solarizeddocx from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("tjmahr/solarizeddocx")
+```
+
+## Usage
+
+This format can be used via YAML metadata.
+
+```
+output: 
+  solarizeddocx::document: default
+```
+
+Or explicitly with rmarkdown:
+
+```{r, eval = FALSE}
+rmarkdown::render(
+  "README.Rmd", 
+  output_format = solarizeddocx::document()
+)
+```
+
+## Customization
+
+The built-in demo function will render a vignette detailing all of the
+customizations used by the package.
+
+```{r, eval = FALSE}
+solarizeddocx::demo_document()
+```
+
+```{r, eval = FALSE, echo = FALSE}
+rmarkdown::render(
+  solarizeddocx::file_syntax_test(), 
+  output_format = rmarkdown::word_document(), 
+  output_file = "defaults.docx", 
+  output_dir = "."
+)
+```
+
+

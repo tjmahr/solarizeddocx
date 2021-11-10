@@ -2,15 +2,44 @@
 % Please edit documentation in R/solarizeddocx-package.R
 \name{document}
 \alias{document}
-\title{Custom RMarkdown Docx Format}
+\title{Solarized Syntax Highlighting in Microsoft Word}
 \usage{
 document(
   ...,
   reference_docx = "solarized",
   highlight = "solarized",
+  syntax_definition = "solarized",
   pandoc_args = character(0)
 )
 }
+\arguments{
+\item{...}{Arguments passed to \code{\link[rmarkdown:word_document]{rmarkdown::word_document()}}.}
+
+\item{reference_docx}{Reference docx file to use. By default, this value is
+set to use \code{"solarized"} to use this package's file. Alternatively, one
+could \code{"default"} for pandoc's default file or a path to a custom docx
+file.}
+
+\item{highlight}{Syntax highlighting style to use. By default, this value is
+set to \code{"solarized"} to use this package's syntax definition. See
+alternatives in \code{\link[rmarkdown:word_document]{rmarkdown::word_document()}}.}
+
+\item{syntax_definition}{Syntax definition to use for syntax highlighting.
+Defaults to \code{"solarized"} to use this package's language definition. This
+option is not one available to  \code{\link[rmarkdown:word_document]{rmarkdown::word_document()}}, but setting
+this argument to \code{NULL} or \code{"default"} will use the default behavior.}
+
+\item{pandoc_args}{Additional command line options to pass to pandoc. (This
+should be a character vector of options.)}
+}
+\value{
+An RMarkdown output format for Word documents.
+}
 \description{
-Custom RMarkdown Docx Format
+Solarized Syntax Highlighting in Microsoft Word
+}
+\examples{
+\dontrun{
+rmarkdown::render("test.Rmd", output_format = solarizeddocx::document())
+}
 }
