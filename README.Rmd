@@ -78,4 +78,19 @@ rmarkdown::render(
 )
 ```
 
+## Assets
 
+This format's styling assets can be accessed by the included `file_` functions.
+For example, here is how one could sneak this format's solarized theme into an
+HTML document.
+
+```{r, eval = FALSE}
+rmarkdown::render(
+  "README.Rmd", 
+  output_format = rmarkdown::html_document_base(
+    pandoc_args = rmarkdown::pandoc_highlight_args(
+      solarizeddocx::file_solarized_light_theme()
+    ) 
+  )
+)
+```
