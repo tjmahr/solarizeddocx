@@ -1,14 +1,17 @@
 Package: solarizeddocx
-Title: What the Package Does (One Line, Title Case)
+Title: A 'Solarized' Theme for 'RMarkdown` `Docx` Documents
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: GPL (>= 3)
+    person(
+      given = "Tristan",
+      family = "Mahr",
+      role = c("aut", "cre"),
+      email = "tristan.mahr@wisc.edu",
+      comment = c(ORCID = "0000-0002-8890-5116")
+    )
+Description: An 'RMarkdown' output format for 'Microsoft' Word '.docx' 
+    documents created by 'pandoc'. 
+License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # solarizeddocx
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/tjmahr/solarizeddocx/workflows/R-CMD-check/badge.svg)](https://github.com/tjmahr/solarizeddocx/actions)
 <!-- badges: end -->
 
 

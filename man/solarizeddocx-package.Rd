@@ -4,12 +4,12 @@
 \name{solarizeddocx-package}
 \alias{solarizeddocx}
 \alias{solarizeddocx-package}
-\title{solarizeddocx: What the Package Does (One Line, Title Case)}
+\title{solarizeddocx: A 'Solarized' Theme for 'RMarkdown` `Docx` Documents}
 \description{
-What the package does (one paragraph).
+An 'RMarkdown' output format for 'Microsoft' Word '.docx' documents created by 'pandoc'.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Tristan Mahr \email{tristan.mahr@wisc.edu} (\href{https://orcid.org/0000-0002-8890-5116}{ORCID})
 
 }
 \keyword{internal}
