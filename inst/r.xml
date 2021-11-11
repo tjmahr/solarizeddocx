@@ -113,7 +113,7 @@
 			<keyword attribute="Reserved Words" context="#stay" String="words"/>
 			<Float attribute="Float" context="#stay"/>
 			<Int attribute="Int" context="#stay"/>
-			<RegExpr attribute="Int" String="[0-9]+[L]?" context="#stay"/>
+			<RegExpr attribute="Int" String="\b[0-9]+[L]?" context="#stay"/>
 			<RegExpr attribute="Keyword" context="#stay" String="[a-zA-Z_]+[a-zA-Z_\.0-9]*(?=[\s]*[(])|\.[a-zA-Z_\.]+[a-zA-Z_\.0-9]*(?=[\s]*[(])"/>
 
 			<DetectChar attribute="Symbol" context="parenthesis" char="("/>
