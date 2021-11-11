@@ -129,8 +129,8 @@ print("but roman output comments")
 c(1.0, 1, 1L)
 ```
 
-One feature in pandoc highlighting but not in RStudio highlighting of escape 
-sequences. 
+One feature we find in pandoc highlighting but do not find in RStudio is the
+highlighting of escape sequences like `\n`. 
 
 ```{r}
 # escape sequences are highlighted inside of strings
@@ -140,9 +140,9 @@ cat(x)
 cat(y)
 ```
 
-Based on my tests, two things that currently not correct with the default
-definition and my definition are the native pipe, lambda syntax, and imaginary
-numbers.
+Based on my tests, three things that are currently not correct with the default
+language definition and my modified language definition are the native pipe,
+lambda syntax, and imaginary numbers.
 
 ```{r, eval = FALSE}
 # native pipe
@@ -159,8 +159,9 @@ round2 <- \(x) round(x, 2)
 -2 + 4i
 ```
 
-My wishlist for the definition is namespace highlighting. It would 
-be cool for package names to be highlighted and italicized.
+My wishlist for a language definition for syntax highlighting is namespace
+highlighting. It would be cool for package names to be highlighted and
+italicized.
 
 ```{r, eval = FALSE}
 stats::rnorm(10)
@@ -174,22 +175,31 @@ Below is the syntax gauntlet where we try a bunch of things.
 library(magrittr)
 
 # I don't think T and F should highlight because they are 
-# overwritable 
+# overwritable
 x <- TRUE | T
 y <- FALSE || F
-1L + 1L
-1.000 - 1.000
-10 ^ 2
-"string"
-'string'
+
+1L + 1L %% 2 == 0
+1.0 * 1.0 / 1.0
++10 ^ 2 ** 2
+-2 - 4i
+.111
+pi
+
 package::my_function
 package:::my_secret_function
+
 NA
 NA_character_
+NA_complex_
+NA_integer_
+NA_real_
+NaN
 Inf
+-Inf
 NULL
-1:10
-for (x in 1) {
+
+for (x in 1:10) {
   !! no
   f <- function(...) {
     x <- c(..., ..1, ..2, ...elt(1))
@@ -207,7 +217,7 @@ for (x in 1) {
 }
 
 a <- list(x = 10, y = 100)
-a$x
+a$x = 1
 a[[1]]
 a[2]
 
@@ -215,11 +225,16 @@ a[2]
 "string"
 "newline\n and escaped slash \\"
 
-x %>% rnorm(10, .) %>% round(2)
+x %>% 
+  rnorm(10, .) %>% 
+  round(2)
 
-x |> round(2)
-10.11 |> (\(x) round(x))()
--2 + 4i
+x |> 
+  round(2)
+
+10.11 |> 
+  (\(x) round(x))()
+
 
 test %>% 
   testy() %>% 
@@ -277,7 +292,7 @@ A paragraph followed by code. **Strong**. *Emphasis*. `Code`.
 print("hello")
 ```
 
-Code that emits a table
+Code that emits a table:
 
 ```{r}
 knitr::kable(
