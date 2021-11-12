@@ -29,3 +29,6 @@ vignettes/*.pdf
 .Rproj.user
 defaults.docx
 README.html
+syntax-test.pdf
+README.log
+README.tex

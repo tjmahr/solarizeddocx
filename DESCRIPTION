@@ -1,6 +1,6 @@
 Package: solarizeddocx
 Title: A 'Solarized' Theme for 'RMarkdown` `Docx` Documents
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Authors@R: 
     person(
       given = "Tristan",
@@ -18,3 +18,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     rmarkdown
+URL: https://github.com/tjmahr/solarizeddocx
+BugReports: https://github.com/tjmahr/solarizeddocx/issues
