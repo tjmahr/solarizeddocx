@@ -2,6 +2,7 @@
 
 export(demo_document)
 export(document)
+export(file_code_block)
 export(file_reference_docx)
 export(file_solarized_light_theme)
 export(file_syntax_definition)

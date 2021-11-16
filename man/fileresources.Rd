@@ -6,6 +6,7 @@
 \alias{file_syntax_definition}
 \alias{file_solarized_light_theme}
 \alias{file_syntax_test}
+\alias{file_code_block}
 \title{Retrieve file paths to package resources}
 \usage{
 file_reference_docx()
@@ -15,6 +16,8 @@ file_syntax_definition()
 file_solarized_light_theme()
 
 file_syntax_test()
+
+file_code_block()
 }
 \value{
 \code{file_reference_docx()} returns the path to the reference docx file

@@ -118,6 +118,12 @@ file_syntax_test <- function() {
   pkg_resource("syntax-test.Rmd")
 }
 
+#' @rdname fileresources
+#' @export
+file_code_block <- function() {
+  pkg_resource("syntax-block.Rmd")
+}
+
 
 pkg_resource <- function(...) {
   system.file(..., package = "solarizeddocx")

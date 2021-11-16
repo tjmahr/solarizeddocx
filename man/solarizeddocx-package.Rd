@@ -8,6 +8,14 @@
 \description{
 An 'RMarkdown' output format for 'Microsoft' Word '.docx' documents created by 'pandoc'.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tjmahr/solarizeddocx}
+  \item Report bugs at \url{https://github.com/tjmahr/solarizeddocx/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Tristan Mahr \email{tristan.mahr@wisc.edu} (\href{https://orcid.org/0000-0002-8890-5116}{ORCID})
 
