@@ -1,12 +1,13 @@
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
+Fit a model:
 ```{r}
-# this comment is italic. the output below is roman
-basename(solarizeddocx::file_solarized_light_theme())
-
-round(1.21)
-
 model <- lm(mpg ~ 1 + cyl, mtcars)
-coef(model)["cyl"]
+coefs <- coef(model)
+
+# prediction for 8 cylinders
+coefs["(Intercept)"] + 8 * coefs["cyl"]
+
+predict(model, data.frame(cyl = 8L))
 ```
