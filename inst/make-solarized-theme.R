@@ -46,7 +46,7 @@ new <- j %>%
   set_theme_text_style("BuiltIn",  ) %>%
   set_theme_text_style("Extension", ) %>%
   set_theme_text_style("Preprocessor", ) %>%
-  set_theme_text_style("Attribute", ) %>%
+  set_theme_text_style("Attribute",  text = p$base00) %>%
   set_theme_text_style("Annotation", ) %>%
   set_theme_text_style("Other", text = p$violet) %>%
   set_theme_text_style("Import", ) %>%
@@ -87,7 +87,8 @@ patches <- tibble::lst(
   SpecialChar = list(text = p$blue),
   String = list(text = p$cyan),
   Char = String,
-  SpecialString = String
+  SpecialString = String,
+  Attribute = list(text = p$base00)
 )
 
 j2 <- patch_theme_text_style(j, patches)
