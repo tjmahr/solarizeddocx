@@ -25,8 +25,15 @@ used by this package. \code{file_syntax_definition()} returns the path to the
 XML file specifying how pandoc should highlight the code in the document.
 \code{file_solarized_light_theme()} returns the path to the .theme file used by
 this package. \code{file_syntax_test()} returns the path to the RMarkdown file
-used by \code{\link[=demo_document]{demo_document()}}.
+used by \code{\link[=demo_document]{demo_document()}}. \code{file_code_block()} returns a minimal .Rmd file
+with a single code block for small illustrations.
 }
 \description{
 Retrieve file paths to package resources
+}
+\references{
+the reference docx is a modified version of the own built into
+pandoc by John MacFarlane. The syntax definition is a modified version of
+the one by the KDE developers. I used the code here:
+\url{https://github.com/KDE/syntax-highlighting/blob/master/data/syntax/r.xml}
 }

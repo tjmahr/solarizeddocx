@@ -2,13 +2,32 @@ Package: solarizeddocx
 Title: A 'Solarized' Theme for 'RMarkdown` `Docx` Documents
 Version: 0.0.1.9000
 Authors@R: 
+  c(
     person(
       given = "Tristan",
       family = "Mahr",
       role = c("aut", "cre"),
       email = "tristan.mahr@wisc.edu",
       comment = c(ORCID = "0000-0002-8890-5116")
+    ),
+    person(
+      given = "Ethan",
+      family = "Schoonover",
+      role = c("ctb", "cph"),
+      comment = "Solarized color themes"
+    ),
+    person(
+      given = "John", 
+      family = "MacFarlane", 
+      role = c("ctb", "cph"),
+      comment = "Pandoc templates"
+    ),
+    person( 
+      family = "KDE contributors", 
+      role = "ctb",
+      comment = "R syntax definition https://github.com/KDE/syntax-highlighting/blob/master/data/syntax/r.xml"
     )
+  )
 Description: An 'RMarkdown' output format for 'Microsoft' Word '.docx' 
     documents created by 'pandoc'. 
 License: GPL (>= 3) + file LICENSE
@@ -17,6 +36,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
-    rmarkdown
+    jsonlite,
+    rlang,
+    rmarkdown,
+    stats
 URL: https://github.com/tjmahr/solarizeddocx
 BugReports: https://github.com/tjmahr/solarizeddocx/issues

@@ -1,7 +1,7 @@
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
-Fit a model:
+Fit a model with `lm`():
 ```{r}
 model <- lm(mpg ~ 1 + cyl, mtcars)
 coefs <- coef(model)
