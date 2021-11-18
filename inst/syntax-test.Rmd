@@ -217,15 +217,27 @@ for (x in 1:10) {
   }
 }
 
+# indexing
 a <- list(x = 10, y = 100)
-a$x = 1
+var <- "x"
+a$x
+a[1]
+a["x"]
+a[var]
 a[[1]]
-a[2]
+a[["x"]]
+a[[var]]
 
+# strings
 'string'
 "string"
 "newline\n and escaped slash \\"
 
+# names
+`x y` <- "test"
+`%in%`("a", letters)
+
+# pipes
 x %>% 
   rnorm(10, .) %>% 
   round(2)
@@ -235,11 +247,6 @@ x |>
 
 10.11 |> 
   (\(x) round(x))()
-
-
-test %>% 
-  testy() %>% 
-  testing()
 
 # I noticed message vs warning/stop having different RStudio colors
 message("test")
@@ -251,6 +258,46 @@ if (TRUE) {
 } else {
   y ~ x + (1 | z:w)
 }
+```
+
+Expanded string gauntlet from `?Quotes`
+
+```{r}
+# \n	newline
+# \r	carriage return
+# \t	tab
+# \b	backspace
+# \a	alert (bell)
+# \f	form feed
+# \v	vertical tab
+# \\	backslash \
+# \'	ASCII apostrophe '
+# \"	ASCII quotation mark "
+# \`	ASCII grave accent (backtick) `
+# \nnn	character with given octal code (1, 2 or 3 digits)
+# \xnn	character with given hex code (1 or 2 hex digits)
+# \unnnn	Unicode character with given code (1--4 hex digits)
+# or \u{nnnn} 
+# \Unnnnnnnn	Unicode character with given code (1--8 hex digits)
+# or \U{nnnnnnnn}
+
+(hw2 <- "\110\x65\154\x6c\157\x20\127\x6f\162\x6c\144\x21")
+(hw3 <- "\u48\u65\u6c\u6c\u6f\u20\u57\u6f\u72\u6c\u64\u21")
+("\u0126\u0119\u1114\u022d\u2001\u03e2\u0954\u0f3f\u13d3\u147b\u203c")
+("\U0126\U0119\U1114\U022d\U2001\U03e2\U0954\U0f3f\U13d3\U147b\U203c")
+
+# 'Raw character constants are also available using a syntax similar to
+# the one used in C++: r"(...)" with ... any character sequence, except
+# that it must not contain the closing sequence )". The delimiter pairs
+# [] and {} can also be used, and R can be used in place of r. For
+# additional flexibility, a number of dashes can be placed between the
+# opening quote and the opening delimiter, as long as the same number of
+# dashes appear between the closing delimiter and the closing quote.'
+
+r"(c:\Program files\R)"
+r"{(\1\2)}"
+r"(use both "double" and 'single' quotes)"
+r"---(\1--)-)---"
 ```
 
 
