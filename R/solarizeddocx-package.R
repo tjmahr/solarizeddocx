@@ -287,7 +287,8 @@ write_pandoc_theme <- function(data, output_path) {
     data,
     output_path,
     null = "null",
-    auto_unbox = TRUE
+    auto_unbox = TRUE,
+    pretty = TRUE
   )
   invisible(data)
 }
