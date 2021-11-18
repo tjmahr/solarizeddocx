@@ -138,10 +138,10 @@
       "underline": false
     },
     "Import": {
-      "text-color": null,
+      "text-color": "#859900",
       "background-color": null,
       "bold": false,
-      "italic": false,
+      "italic": true,
       "underline": false
     },
     "Char": {

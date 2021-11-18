@@ -1,5 +1,10 @@
 # solarizeddocx 0.0.1.9000
 
+  - Added `|>` as operator to syntax definition.
+  
+  - Added a new `Import` syntax highlighting type for package names before
+    `::` or `:::`. This item type gets italic green in solarized light.
+
   - Added theme-building functions: `copy_base_pandoc_theme()`,
     `set_theme_text_style()`, `patch_theme_text_style()`,
     `write_pandoc_theme()`.

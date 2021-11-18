@@ -49,7 +49,7 @@ new <- j %>%
   set_theme_text_style("Attribute",  text = p$base00) %>%
   set_theme_text_style("Annotation", ) %>%
   set_theme_text_style("Other", text = p$violet) %>%
-  set_theme_text_style("Import", ) %>%
+  set_theme_text_style("Import", text = p$green, italic = TRUE) %>%
   set_theme_text_style("DataType", ) %>%
   set_theme_text_style("Error", text = p$orange) %>%
   set_theme_text_style("Alert", text = p$orange) %>%
@@ -88,7 +88,8 @@ patches <- tibble::lst(
   String = list(text = p$cyan),
   Char = String,
   SpecialString = String,
-  Attribute = list(text = p$base00)
+  Attribute = list(text = p$base00),
+  Import = list(text = p$green, italic = TRUE)
 )
 
 j2 <- patch_theme_text_style(j, patches)

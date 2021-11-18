@@ -127,6 +127,13 @@ print("but roman output comments")
 
 # integers ending in L are now highlighted
 c(1.0, 1, 1L)
+
+# italicized package names in namespace calls
+f <- stats::rnorm
+f <- stats:::rnorm
+
+# native pipe highlighted
+x <- rnorm(10) |> round(1)
 ```
 
 One feature we find in pandoc highlighting but do not find in RStudio is the
@@ -140,14 +147,11 @@ cat(x)
 cat(y)
 ```
 
-Based on my tests, three things that are currently not correct with the default
+Based on my tests, two things that are currently not correct with the default
 language definition and my modified language definition are the native pipe,
 lambda syntax, and imaginary numbers.
 
 ```{r, eval = FALSE}
-# native pipe
-1 |> rnorm(1)
-
 # lambda
 round2 <- \(x) round(x, 2)
 1 |> rnorm(1) |> round(2)
@@ -159,13 +163,6 @@ round2 <- \(x) round(x, 2)
 -2 + 4i
 ```
 
-My wishlist for a language definition for syntax highlighting is namespace
-highlighting. It would be cool for package names to be highlighted and
-italicized.
-
-```{r, eval = FALSE}
-stats::rnorm(10)
-```
 
 ### The Gauntlet
 
