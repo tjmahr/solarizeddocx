@@ -42,3 +42,4 @@ Imports:
     stats
 URL: https://github.com/tjmahr/solarizeddocx
 BugReports: https://github.com/tjmahr/solarizeddocx/issues
+SystemRequirements: pandoc (>= 2.0.4) - http://pandoc.org
