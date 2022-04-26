@@ -144,7 +144,11 @@ pkg_resource <- function(...) {
 #' @references  Solarized Light Theme colors via
 #'   <https://github.com/altercation/solarized#the-values>
 #' @examples
-#' s <- tempfile()
+#'
+#' d <- tempfile("solarizeddocx-ex")
+#' dir.create(d)
+#' s <- tempfile(tmpdir = d)
+#'
 #' copy_base_pandoc_theme(s)
 #' data_theme <- jsonlite::read_json(s)
 #' str(data_theme, max.level = 2)

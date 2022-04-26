@@ -57,7 +57,10 @@ colors.
 Syntax highlighting theme building tools
 }
 \examples{
-s <- tempfile()
+
+d <- tempfile("solarizeddocx-ex")
+dir.create(d)
+s <- tempfile(tmpdir = d)
 copy_base_pandoc_theme(s)
 data_theme <- jsonlite::read_json(s)
 str(data_theme, max.level = 2)
