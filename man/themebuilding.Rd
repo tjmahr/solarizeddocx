@@ -57,10 +57,8 @@ colors.
 Syntax highlighting theme building tools
 }
 \examples{
-
-d <- tempfile("solarizeddocx-ex")
-dir.create(d)
-s <- tempfile(tmpdir = d)
+\dontrun{
+s <- tempfile()
 copy_base_pandoc_theme(s)
 data_theme <- jsonlite::read_json(s)
 str(data_theme, max.level = 2)
@@ -90,6 +88,7 @@ data_theme_patches <- list(
 my_theme2 <- patch_theme_text_style(data_theme, data_theme_patches)
 str(my_theme2$`text-styles`$Function)
 str(my_theme2$`text-styles`$Float)
+}
 }
 \references{
 Solarized Light Theme colors via
